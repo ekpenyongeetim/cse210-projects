@@ -1,17 +1,12 @@
-using System;
-
 class Program
 {
     static void Main(string[] args)
     {
+        List<int> numbers = new List<int>();
+
         // Prompt the user to enter a list of numbers
         Console.WriteLine("Enter a list of numbers, type 0 when finished.");
 
-        int sum = 0;
-        int count = 0;
-        int maxNumber = int.MinValue;
-
-        // Input loop
         while (true)
         {
             Console.Write("Enter number: ");
@@ -21,23 +16,33 @@ class Program
             if (number == 0)
                 break;
 
-            // Add the number to the sum
-            sum += number;
-            count++;
-
-            // Update the maximum number if needed
-            if (number > maxNumber)
-                maxNumber = number;
+            numbers.Add(number);
         }
 
-        // Compute and print the sum
+        // Core Requirements
+        // 1. Compute the sum
+        int sum = numbers.Sum();
         Console.WriteLine($"The sum is: {sum}");
 
-        // Compute and print the average
-        int average = sum / count;
+        // 2. Compute the average
+        double average = numbers.Average();
         Console.WriteLine($"The average is: {average}");
 
-        // Print the maximum number
+        // 3. Find the maximum number
+        int maxNumber = numbers.Max();
         Console.WriteLine($"The largest number is: {maxNumber}");
+
+        // Stretch Challenges
+        // 1. Find the smallest positive number
+        int smallestPositive = numbers.Where(n => n > 0).DefaultIfEmpty(0).Min();
+        Console.WriteLine($"The smallest positive number is: {smallestPositive}");
+
+        // 2. Sort the numbers and display the sorted list
+        List<int> sortedNumbers = numbers.OrderBy(n => n).ToList();
+        Console.WriteLine("The sorted list is:");
+        foreach (int n in sortedNumbers)
+        {
+            Console.WriteLine(n);
+        }
     }
 }
