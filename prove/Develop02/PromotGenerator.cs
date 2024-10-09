@@ -1,3 +1,4 @@
+// Generates random prompts for journaling
 public class PromptGenerator 
 {
     public List<string> _prompts;
@@ -18,6 +19,8 @@ public class PromptGenerator
 
     public string GetRandomPrompt()
     {
-        return "";
+        Random rand = new Random();
+        int index = rand.Next(_prompts.Count);
+        return _prompts[index];
     }
 }
