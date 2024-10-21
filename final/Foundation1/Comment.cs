@@ -1,3 +1,4 @@
+// Comment class to track each comment's name and message
 class Comment
 {
     public string Name { get; set; }
