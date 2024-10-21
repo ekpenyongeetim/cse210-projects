@@ -15,20 +15,20 @@ class Product
     }
 
     // Method to calculate total price of this product
-    public void GetTotalPrice()
+    public double GetTotalPrice()
     {
-        
+        return _pricePerUnit * _quantity;
     }
 
     // Method to return the product name
     public string GetProductName()
     {
-        return "";
+        return _productName;
     }
 
     // Method to return the product ID
     public string GetProductId()
     {
-        return "";
+        return _productId;
     }
 }

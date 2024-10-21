@@ -15,14 +15,14 @@ class Address
     }
 
     // Method to check if the address is in the USA
-    public void IsInUSA()
+    public bool IsInUSA()
     {
-       
+        return _country.ToLower() == "usa";
     }
 
     // Method to return the full address as a string
     public string GetFullAddress()
     {
-        return "";
+        return $"{_street}\n{_city}, {_state}\n{_country}";
     }
 }

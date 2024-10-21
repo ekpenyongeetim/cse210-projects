@@ -4,21 +4,22 @@ class Customer
     private Address _address;
 
     // Constructor to initialize the customer
-    public Customer()
+    public Customer(string customerName, Address address)
     {
-
+        _customerName = customerName;
+        _address = address;
     }
 
     // Method to check if the customer lives in the USA
-    public void LivesInUSA()
+    public bool LivesInUSA()
     {
-
+        return _address.IsInUSA();
     }
 
     // Method to return the customer name
     public string GetCustomerName()
     {
-        return "";
+        return _customerName;
     }
 
     // Method to return the customer address
