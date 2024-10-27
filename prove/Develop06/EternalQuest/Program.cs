@@ -53,7 +53,6 @@ class Program
         }
     }
 
-    // Method to create a new goal with user input
     static void CreateNewGoal(List<Goal> goals)
     {
         Console.WriteLine("Choose Goal Type: 1. Simple 2. Eternal 3. Checklist");
@@ -89,7 +88,6 @@ class Program
         }
     }
 
-    // Method to display all goals
     static void ShowAllGoals(List<Goal> goals)
     {
         foreach (Goal goal in goals)
@@ -98,7 +96,6 @@ class Program
         }
     }
 
-    // Method to save goals to a file
     static void SaveGoals(List<Goal> goals)
     {
         Console.Write("Enter a file name to save goals: ");
@@ -108,14 +105,13 @@ class Program
         {
             foreach (Goal goal in goals)
             {
-                outputFile.WriteLine(goal.ToString()); // Assumes each goal has a ToString() for saving
+                outputFile.WriteLine(goal.ToString());
             }
         }
 
         Console.WriteLine("Goals saved successfully!");
     }
 
-    // Method to load goals from a file
     static void LoadGoals(List<Goal> goals)
     {
         Console.Write("Enter a file name to load goals: ");
@@ -123,12 +119,12 @@ class Program
 
         if (File.Exists(fileName))
         {
-            goals.Clear(); // Clear current list before loading
+            goals.Clear();
 
             string[] lines = File.ReadAllLines(fileName);
             foreach (string line in lines)
             {
-                string[] parts = line.Split('|'); // Assuming '|' separates goal properties
+                string[] parts = line.Split('|');
                 string goalType = parts[0];
                 string name = parts[1];
                 int points = int.Parse(parts[2]);
@@ -150,7 +146,7 @@ class Program
                     int completedCount = int.Parse(parts[5]);
                     var checklistGoal = new ChecklistGoal(name, points, requiredCount, bonusPoints)
                     {
-                        CompletedCount = completedCount // Assuming a public setter for CompletedCount
+                        CompletedCount = completedCount
                     };
                     goals.Add(checklistGoal);
                 }
@@ -164,7 +160,6 @@ class Program
         }
     }
 
-    // Method to record a goal achievement
     static int RecordAchievement(List<Goal> goals)
     {
         Console.WriteLine("Select a Goal to Record:");
