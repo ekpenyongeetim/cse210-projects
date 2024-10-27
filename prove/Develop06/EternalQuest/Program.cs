@@ -67,7 +67,7 @@ class Program
 
         Console.Write("How many points do I want associated with this goal? ");
         string? pointsInput = Console.ReadLine();
-        int points = int.TryParse(pointsInput, out int parsedPoints) ? parsedPoints : 0; // Default to 0 if null or invalid
+        int points = int.TryParse(pointsInput, out int parsedPoints) ? parsedPoints : 0;
 
         switch (typeChoice)
         {
@@ -94,11 +94,19 @@ class Program
         }
     }
 
+    // Updated ShowAllGoals Method
     static void ShowAllGoals(List<Goal> goals)
     {
-        foreach (Goal goal in goals)
+        if (goals.Count == 0)
         {
-            goal.ShowGoal();
+            Console.WriteLine("There are no goals to display.");
+        }
+        else
+        {
+            foreach (Goal goal in goals)
+            {
+                goal.ShowGoal();
+            }
         }
     }
 
