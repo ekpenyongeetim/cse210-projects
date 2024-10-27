@@ -21,7 +21,7 @@ class Program
             Console.WriteLine("7. Exit");
             Console.Write("Choose an option: ");
 
-            string choice = Console.ReadLine();
+            string? choice = Console.ReadLine();
 
             switch (choice)
             {
@@ -56,16 +56,18 @@ class Program
     static void CreateNewGoal(List<Goal> goals)
     {
         Console.WriteLine("Choose Goal Type: 1. Simple 2. Eternal 3. Checklist");
-        string typeChoice = Console.ReadLine();
+        string? typeChoice = Console.ReadLine();
 
         Console.Write("What is the name of your goal? ");
-        string name = Console.ReadLine();
-        
+        string? name = Console.ReadLine();
+        name = name ?? "Unnamed Goal"; // Default if null
+
         Console.Write("What is the description of your goal? ");
-        string description = Console.ReadLine();
+        string? description = Console.ReadLine();
 
         Console.Write("How many points do I want associated with this goal? ");
-        int points = int.Parse(Console.ReadLine());
+        string? pointsInput = Console.ReadLine();
+        int points = int.TryParse(pointsInput, out int parsedPoints) ? parsedPoints : 0; // Default to 0 if null or invalid
 
         switch (typeChoice)
         {
@@ -77,9 +79,13 @@ class Program
                 break;
             case "3":
                 Console.Write("Enter Required Times to Complete: ");
-                int requiredCount = int.Parse(Console.ReadLine());
+                string? requiredCountInput = Console.ReadLine();
+                int requiredCount = int.TryParse(requiredCountInput, out int parsedRequiredCount) ? parsedRequiredCount : 0;
+
                 Console.Write("Enter Bonus Points: ");
-                int bonusPoints = int.Parse(Console.ReadLine());
+                string? bonusPointsInput = Console.ReadLine();
+                int bonusPoints = int.TryParse(bonusPointsInput, out int parsedBonusPoints) ? parsedBonusPoints : 0;
+
                 goals.Add(new ChecklistGoal(name, points, requiredCount, bonusPoints));
                 break;
             default:
@@ -99,7 +105,12 @@ class Program
     static void SaveGoals(List<Goal> goals)
     {
         Console.Write("Enter a file name to save goals: ");
-        string fileName = Console.ReadLine();
+        string? fileName = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(fileName))
+        {
+            Console.WriteLine("Invalid file name.");
+            return;
+        }
 
         using (StreamWriter outputFile = new StreamWriter(fileName))
         {
@@ -115,7 +126,12 @@ class Program
     static void LoadGoals(List<Goal> goals)
     {
         Console.Write("Enter a file name to load goals: ");
-        string fileName = Console.ReadLine();
+        string? fileName = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(fileName))
+        {
+            Console.WriteLine("Invalid file name.");
+            return;
+        }
 
         if (File.Exists(fileName))
         {
@@ -168,7 +184,9 @@ class Program
             Console.Write($"{i + 1}. ");
             goals[i].ShowGoal();
         }
-        int goalIndex = int.Parse(Console.ReadLine()) - 1;
+
+        string? goalIndexInput = Console.ReadLine();
+        int goalIndex = int.TryParse(goalIndexInput, out int parsedGoalIndex) ? parsedGoalIndex - 1 : -1;
 
         if (goalIndex >= 0 && goalIndex < goals.Count)
         {

@@ -2,7 +2,7 @@ using System;
 
 public class SimpleGoal : Goal
 {
-    public bool IsCompleted { get; private set; } = false;
+    public bool IsCompleted { get; set; } = false; // Public setter for loading
 
     public SimpleGoal(string name, int points) : base(name, points) { }
 
