@@ -20,7 +20,10 @@ public class Activity
     // Summary method
     public virtual string GetSummary()
     {
-        return $"{Date} Activity ({Duration} min): Distance {Distance():0.0} km, " +
-               $"Speed {Speed():0.0} kph, Pace {Pace():0.0} min per km";
-    }
+    string activityType = this.GetType().Name; // Get the name of the derived class (e.g., Running, Cycling, Swimming)
+    return $"{Date} {activityType} ({Duration} min):\n" +
+           $"    Distance: {Distance():0.0} km\n" +
+           $"    Speed: {Speed():0.0} kph\n" +
+           $"    Pace: {Pace():0.0} min per km\n";
+}
 }

@@ -14,9 +14,4 @@ public class Cycling : Activity
 
     public override double Pace() => 60 / Speed();
 
-    public override string GetSummary()
-    {
-        return $"{Date} Cycling ({Duration} min): Distance {Distance():0.0} km, " +
-               $"Speed {Speed():0.0} kph, Pace {Pace():0.0} min per km";
-    }
 }
